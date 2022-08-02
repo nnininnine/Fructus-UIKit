@@ -21,10 +21,11 @@ class OnboardingViewController: UIViewController {
     collectionView.collectionViewLayout = layout
     collectionView.isPagingEnabled = true
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.backgroundColor = .red
-
+    
     return collectionView
   }()
+  
+  private let cellSpacing: CGFloat = 40
 
   // MARK: - Init
 
@@ -82,9 +83,9 @@ class OnboardingViewController: UIViewController {
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 
-extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 0
+    return 5
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -93,5 +94,22 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
     cell.configure(with: fruitsData[indexPath.row])
 
     return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return .zero
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    let side = cellSpacing / 2.0
+    return .init(top: 0, left: side, bottom: 0, right: side)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return cellSpacing
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: collectionView.bounds.width - cellSpacing, height: collectionView.bounds.height)
   }
 }

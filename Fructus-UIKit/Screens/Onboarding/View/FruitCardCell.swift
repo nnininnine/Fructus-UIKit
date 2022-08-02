@@ -20,6 +20,7 @@ class FruitCardCell: UICollectionViewCell {
   }
   
   func setupUI() {
+    contentView.layer.cornerRadius = 20
     contentView.backgroundColor = fruit?.gradientColors[1]
   }
   
