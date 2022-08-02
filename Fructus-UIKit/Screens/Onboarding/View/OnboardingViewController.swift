@@ -96,7 +96,7 @@ class OnboardingViewController: UIViewController {
   @objc func navToHome() {
     UserDefaults().set(true, forKey: UserDefaultsKey.isOnboarding.rawValue)
 
-    navigationController?.setViewControllers([HomeViewController()], animated: true)
+    navigationController?.setViewControllers([HomeViewController()], animated: false)
   }
 }
 
@@ -113,7 +113,7 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FruitCardCell.identifier, for: indexPath) as? FruitCardCell else { return UICollectionViewCell() }
 
-    cell.configure(with: fruitsData[indexPath.row])
+    cell.configure(with: fruitsData[indexPath.row], onTap: navToHome)
 
     return cell
   }

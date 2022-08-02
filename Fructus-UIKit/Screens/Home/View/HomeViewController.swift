@@ -26,6 +26,8 @@ class HomeViewController: UIViewController {
 
   func setupUI() {
     view.backgroundColor = .white
-    title = "Home"
+    title = "Fruits"
+    navigationController?.navigationBar.isHidden = false
+    navigationController?.navigationBar.prefersLargeTitles = true
   }
 }

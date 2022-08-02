@@ -75,16 +75,19 @@ class FruitCardCell: UICollectionViewCell {
     
     return button
   }()
+  
+  private var onTap: () -> Void = {}
 
   // MARK: - Methods
   
-  func configure(with fruit: Fruit) {
+  func configure(with fruit: Fruit, onTap: @escaping () -> Void) {
     self.fruit = fruit
+    self.onTap = onTap
     
-    setupUI()
+    setup()
   }
   
-  func setupUI() {
+  func setup() {
     // add subviews
     addView()
     
@@ -103,7 +106,13 @@ class FruitCardCell: UICollectionViewCell {
     titleLabel.text = fruit?.title
     headlineLabel.text = fruit?.headline
     
+    // setup button
+    startButton.addTarget(self, action: #selector(onTapStart), for: .touchUpInside)
     applyConstraints()
+  }
+  
+  @objc func onTapStart() {
+    onTap()
   }
   
   func addView() {
