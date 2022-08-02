@@ -17,6 +17,7 @@
 		699B1FFC2898C00E00D9E72E /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699B1FFB2898C00E00D9E72E /* Fruit.swift */; };
 		699B20002898C2B100D9E72E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699B1FFF2898C2B100D9E72E /* HomeViewController.swift */; };
 		699B20062898CA1300D9E72E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699B20052898CA1300D9E72E /* Constants.swift */; };
+		699B20082898D70B00D9E72E /* FruitCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699B20072898D70B00D9E72E /* FruitCardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		699B1FFB2898C00E00D9E72E /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
 		699B1FFF2898C2B100D9E72E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		699B20052898CA1300D9E72E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		699B20072898D70B00D9E72E /* FruitCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitCardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				699B1FF52898BD8000D9E72E /* OnboardingViewController.swift */,
+				699B20072898D70B00D9E72E /* FruitCardViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				699B1FFC2898C00E00D9E72E /* Fruit.swift in Sources */,
 				699B1FDA2897B64000D9E72E /* AppDelegate.swift in Sources */,
 				699B1FF62898BD8000D9E72E /* OnboardingViewController.swift in Sources */,
+				699B20082898D70B00D9E72E /* FruitCardViewController.swift in Sources */,
 				699B1FF92898BFD700D9E72E /* FruitData.swift in Sources */,
 				699B1FDC2897B64000D9E72E /* SceneDelegate.swift in Sources */,
 				699B20002898C2B100D9E72E /* HomeViewController.swift in Sources */,
