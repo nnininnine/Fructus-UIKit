@@ -10,6 +10,15 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
   // MARK: - Properties
+  
+  private var dots: UIPageControl = {
+    let pageControl: UIPageControl = .init(frame: .zero)
+    pageControl.pageIndicatorTintColor = .systemGray5.withAlphaComponent(0.5)
+    pageControl.currentPageIndicatorTintColor = .white
+    pageControl.translatesAutoresizingMaskIntoConstraints = false
+    
+    return pageControl
+  } ()
 
   private var pageView: UICollectionView = {
     let collectionView: UICollectionView = .init(frame: .zero, collectionViewLayout: .init())
@@ -20,6 +29,7 @@ class OnboardingViewController: UIViewController {
 
     collectionView.collectionViewLayout = layout
     collectionView.isPagingEnabled = true
+    collectionView.showsHorizontalScrollIndicator = false
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     
     return collectionView
@@ -51,8 +61,11 @@ class OnboardingViewController: UIViewController {
     title = "Onboarding"
     navigationController?.navigationBar.isHidden = true
 
-    // add fruit card
+    // add fruit card collection view
     view.addSubview(pageView)
+    
+    // add page control
+    view.addSubview(dots)
 
     // apply constraints
     applyConstraints()
@@ -71,7 +84,14 @@ class OnboardingViewController: UIViewController {
       pageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
     ]
     
+    let dotsConstraints = [
+      dots.widthAnchor.constraint(equalToConstant: view.bounds.width),
+      dots.heightAnchor.constraint(equalToConstant: 40),
+      dots.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+    ]
+    
     NSLayoutConstraint.activate(pageViewConstraints)
+    NSLayoutConstraint.activate(dotsConstraints)
   }
 
   @objc func navToHome() {
@@ -84,7 +104,10 @@ class OnboardingViewController: UIViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 
 extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+  // MARK: - Cell
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    dots.numberOfPages = 5
     return 5
   }
 
@@ -95,6 +118,17 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
 
     return cell
   }
+  
+  // MARK: - Scrolling
+  
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    let pageFloat = (scrollView.contentOffset.x / scrollView.bounds.width)
+    let currentPage = Int(round(pageFloat))
+    
+    dots.currentPage = currentPage
+  }
+  
+  // MARK: - Spacing, Sizing
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return .zero
