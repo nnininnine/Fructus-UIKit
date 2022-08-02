@@ -11,20 +11,14 @@ import UIKit
 class OnboardingViewController: UIViewController {
   // MARK: - Properties
 
-  private var navToHomeButton: UIButton = {
-    let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
-    button.configuration = .plain()
-    button.configuration?.cornerStyle = .capsule
-    button.configuration?.background.strokeColor = .label
-    button.configuration?.background.strokeWidth = 1
-    button.configuration?.title = "🤨 Start"
-    button.configuration?.baseForegroundColor = .label
-    button.translatesAutoresizingMaskIntoConstraints = false
-    
-    return button
+  private var pageView: UICollectionView = {
+    let collectionView: UICollectionView = .init()
+
+    collectionView.isPagingEnabled = true
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+    return collectionView
   }()
-  
-  
 
   // MARK: - Init
 
@@ -32,6 +26,12 @@ class OnboardingViewController: UIViewController {
     super.viewDidLoad()
 
     setup()
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+
+    pageView.frame = view.bounds
   }
 
   // MARK: - Methods
@@ -44,27 +44,20 @@ class OnboardingViewController: UIViewController {
     view.backgroundColor = .systemBackground
     title = "Onboarding"
 
-    // add button
-    navToHomeButton.addTarget(self, action: #selector(navToHome), for: .touchUpInside)
-    view.addSubview(navToHomeButton)
-    
+    // add fruit card
+    view.addSubview(pageView)
+
     // apply constraints
     applyConstraints()
   }
-  
+
   private func applyConstraints() {
-    let navToHomeButtonConstraints = [
-      navToHomeButton.widthAnchor.constraint(equalToConstant: 100),
-      navToHomeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      navToHomeButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-    ]
-    
-    NSLayoutConstraint.activate(navToHomeButtonConstraints)
+//    NSLayoutConstraint.activate()
   }
 
   @objc func navToHome() {
-    UserDefaults.init().set(true, forKey:  UserDefaultsKey.isOnboarding.rawValue)
-    
+    UserDefaults().set(true, forKey: UserDefaultsKey.isOnboarding.rawValue)
+
     navigationController?.setViewControllers([HomeViewController()], animated: true)
   }
 }
