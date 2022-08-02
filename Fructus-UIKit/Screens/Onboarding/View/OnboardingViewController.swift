@@ -13,8 +13,12 @@ class OnboardingViewController: UIViewController {
 
   private var navToHomeButton: UIButton = {
     let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
-    button.setTitle("😃 Start", for: .normal)
-    button.setTitleColor(.label, for: .normal)
+    button.configuration = .plain()
+    button.configuration?.cornerStyle = .capsule
+    button.configuration?.background.strokeColor = .label
+    button.configuration?.background.strokeWidth = 1
+    button.configuration?.title = "🤨 Start"
+    button.configuration?.baseForegroundColor = .label
     button.translatesAutoresizingMaskIntoConstraints = false
     
     return button
@@ -50,6 +54,7 @@ class OnboardingViewController: UIViewController {
   
   private func applyConstraints() {
     let navToHomeButtonConstraints = [
+      navToHomeButton.widthAnchor.constraint(equalToConstant: 100),
       navToHomeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       navToHomeButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
     ]
@@ -58,7 +63,7 @@ class OnboardingViewController: UIViewController {
   }
 
   @objc func navToHome() {
-    UserDefaults.init().set(false, forKey:  UserDefaultsKey.isOnboarding.rawValue)
+    UserDefaults.init().set(true, forKey:  UserDefaultsKey.isOnboarding.rawValue)
     
     navigationController?.setViewControllers([HomeViewController()], animated: true)
   }
