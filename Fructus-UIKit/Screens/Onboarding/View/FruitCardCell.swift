@@ -15,18 +15,19 @@ class FruitCardCell: UICollectionViewCell {
   private var fruit: Fruit?
 
   // MARK: - Methods
-  func setup() {
-    setupUI()
-  }
   
   func setupUI() {
-    contentView.layer.cornerRadius = 20
-    contentView.backgroundColor = fruit?.gradientColors[1]
+    let gradientLayer = CAGradientLayer()
+    gradientLayer.frame = contentView.bounds
+    gradientLayer.colors = fruit?.gradientColors.map({ $0?.cgColor }) as? [Any]
+    gradientLayer.cornerRadius = 20
+    
+    contentView.layer.insertSublayer(gradientLayer, at: 0)
   }
   
   func configure(with fruit: Fruit) {
     self.fruit = fruit
     
-    setup()
+    setupUI()
   }
 }
