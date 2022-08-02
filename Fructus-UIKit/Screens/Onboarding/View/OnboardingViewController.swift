@@ -58,6 +58,8 @@ class OnboardingViewController: UIViewController {
   }
 
   @objc func navToHome() {
+    UserDefaults.init().set(false, forKey:  UserDefaultsKey.isOnboarding.rawValue)
+    
     navigationController?.setViewControllers([HomeViewController()], animated: true)
   }
 }
