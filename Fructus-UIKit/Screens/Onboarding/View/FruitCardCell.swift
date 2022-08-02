@@ -62,6 +62,17 @@ class FruitCardCell: UICollectionViewCell {
   private var startButton: UIButton = {
     let button: UIButton = .init(frame: CGRect(x: 0, y: 0, width: 104, height: 46))
     
+    button.configuration = UIButton.Configuration.plain()
+    button.configuration?.title = "Start"
+    button.configuration?.image = UIImage(systemName: "arrow.right.circle")
+    button.configuration?.imagePadding = 8
+    button.configuration?.imagePlacement = .trailing
+    button.configuration?.cornerStyle = .capsule
+    button.configuration?.background.strokeColor = .white
+    button.configuration?.background.strokeWidth = 1.25
+    button.configuration?.baseForegroundColor = .white
+    button.translatesAutoresizingMaskIntoConstraints = false
+    
     return button
   }()
 
@@ -99,6 +110,7 @@ class FruitCardCell: UICollectionViewCell {
     contentView.addSubview(imageView)
     contentView.addSubview(titleLabel)
     contentView.addSubview(headlineLabel)
+    contentView.addSubview(startButton)
   }
   
   func setupImageView() {
@@ -112,7 +124,7 @@ class FruitCardCell: UICollectionViewCell {
       imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
       imageView.heightAnchor.constraint(equalToConstant: contentView.bounds.width * 0.8),
       imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -110)
+      imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -100)
     ]
     
     let titleConstraints = [
@@ -126,8 +138,16 @@ class FruitCardCell: UICollectionViewCell {
       headlineLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16)
     ]
     
+    let startButtonConstraints = [
+      startButton.widthAnchor.constraint(equalToConstant: 104),
+      startButton.heightAnchor.constraint(equalToConstant: 46),
+      startButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      startButton.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: 20)
+    ]
+    
     NSLayoutConstraint.activate(imageViewConstraints)
     NSLayoutConstraint.activate(titleConstraints)
     NSLayoutConstraint.activate(headlineConstraints)
+    NSLayoutConstraint.activate(startButtonConstraints)
   }
 }
