@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6947C78828991C4B00922181 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6947C78728991C4B00922181 /* HomeViewModel.swift */; };
 		699B1FDA2897B64000D9E72E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699B1FD92897B64000D9E72E /* AppDelegate.swift */; };
 		699B1FDC2897B64000D9E72E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699B1FDB2897B64000D9E72E /* SceneDelegate.swift */; };
 		699B1FE32897B64100D9E72E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699B1FE22897B64100D9E72E /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6947C78728991C4B00922181 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		699B1FD62897B64000D9E72E /* Fructus-UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fructus-UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		699B1FD92897B64000D9E72E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		699B1FDB2897B64000D9E72E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6947C78628991C3B00922181 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6947C78728991C4B00922181 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		699B1FCD2897B64000D9E72E = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +143,7 @@
 		699B1FFD2898C29500D9E72E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				6947C78628991C3B00922181 /* ViewModel */,
 				699B1FFE2898C29B00D9E72E /* View */,
 			);
 			path = Home;
@@ -226,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				699B1FFC2898C00E00D9E72E /* Fruit.swift in Sources */,
+				6947C78828991C4B00922181 /* HomeViewModel.swift in Sources */,
 				699B1FDA2897B64000D9E72E /* AppDelegate.swift in Sources */,
 				699B1FF62898BD8000D9E72E /* OnboardingViewController.swift in Sources */,
 				699B20082898D70B00D9E72E /* FruitCardCell.swift in Sources */,
