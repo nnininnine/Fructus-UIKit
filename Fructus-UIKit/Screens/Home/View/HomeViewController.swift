@@ -13,8 +13,12 @@ class HomeViewController: UIViewController {
   private var tableView: UITableView = {
     let tableView: UITableView = .init(frame: .zero)
 
+    tableView.separatorStyle = .singleLine
+
     return tableView
   }()
+
+  private var vm: HomeViewModel = .init(fruits: fruitsData)
 
   // MARK: - Init
 
@@ -33,17 +37,22 @@ class HomeViewController: UIViewController {
   // MARK: - Methods
 
   func setup() {
-    setupUI()
+    setupNav()
 
     // setup table view
     setupTableView()
   }
 
-  func setupUI() {
+  func setupNav() {
     view.backgroundColor = .white
     title = "Fruits"
     navigationController?.navigationBar.isHidden = false
     navigationController?.navigationBar.prefersLargeTitles = true
+    
+    // add nav bar item
+    let barButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: nil)
+    barButton.tintColor = .label
+    navigationItem.rightBarButtonItem = barButton
   }
 
   func setupTableView() {
