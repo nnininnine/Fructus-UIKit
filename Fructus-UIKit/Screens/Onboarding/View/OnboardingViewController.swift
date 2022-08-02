@@ -31,7 +31,6 @@ class OnboardingViewController: UIViewController {
     collectionView.isPagingEnabled = true
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-
     return collectionView
   }()
 
