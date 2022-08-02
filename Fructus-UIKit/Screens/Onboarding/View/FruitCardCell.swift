@@ -7,27 +7,21 @@
 
 import UIKit
 
-class FruitCardViewController: UIViewController {
+class FruitCardCell: UICollectionViewCell {
   // MARK: - Properties
 
-  var fruit: Fruit
+  static let identifier = "FruitCardCell"
+  
+  private var fruit: Fruit?
 
   // MARK: - Init
 
-  init(fruit: Fruit) {
-    self.fruit = fruit
-    
-    super.init(nibName: nil, bundle: nil)
+  override init(frame: CGRect) {
+    super.init(frame: frame)
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    setup()
   }
 
   // MARK: - Methods
@@ -36,6 +30,12 @@ class FruitCardViewController: UIViewController {
   }
   
   func setupUI() {
-    view.backgroundColor = fruit.gradientColors[0]
+    contentView.backgroundColor = fruit?.gradientColors[1]
+  }
+  
+  func configure(with fruit: Fruit) {
+    self.fruit = fruit
+    
+    setup()
   }
 }
