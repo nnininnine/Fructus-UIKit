@@ -75,6 +75,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: FruitCell.identifier, for: indexPath) as? FruitCell else { return UITableViewCell() }
 
+    cell.configure(with: vm.fruits[indexPath.row])
+
     return cell
   }
 }
