@@ -43,7 +43,7 @@ class FruitDetailViewController: UIViewController {
     let label: UILabel = .init()
     label.text = fruit.title
     label.sizeToFit()
-    label.font = .systemFont(ofSize: 24, weight: .heavy)
+    label.font = .systemFont(ofSize: 34, weight: .heavy)
     label.textColor = fruit.gradientColors[1] ?? .label
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
