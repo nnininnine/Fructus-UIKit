@@ -49,6 +49,39 @@ class FruitCell: UITableViewCell {
     return imageView
   }()
 
+  private lazy var titleLabel: UILabel = {
+    let label: UILabel = .init(frame: .zero)
+
+    label.text = fruit?.title
+    label.textColor = .label
+    label.font = .systemFont(ofSize: 24, weight: .bold)
+
+    return label
+  }()
+
+  private lazy var headlineLabel: UILabel = {
+    let label: UILabel = .init(frame: .zero)
+
+    label.text = fruit?.headline
+    label.textColor = .gray
+    label.numberOfLines = 0
+    label.font = .systemFont(ofSize: 12)
+
+    return label
+  }()
+
+  private lazy var stackView: UIStackView = {
+    let stackView: UIStackView = .init(arrangedSubviews: [titleLabel, headlineLabel])
+
+    stackView.axis = .vertical
+    stackView.alignment = .fill
+    stackView.spacing = 5
+    stackView.sizeToFit()
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+
+    return stackView
+  }()
+
   // MARK: - Methods
 
   override func setSelected(_ selected: Bool, animated: Bool) {}
@@ -60,6 +93,7 @@ class FruitCell: UITableViewCell {
   func addView() {
     contentView.addSubview(gradientView)
     contentView.addSubview(fruitImage)
+    contentView.addSubview(stackView)
   }
 
   func setupImage(with fruit: Fruit) {
@@ -78,8 +112,15 @@ class FruitCell: UITableViewCell {
       gradientView.topAnchor.constraint(equalTo: fruitImage.topAnchor),
       gradientView.leftAnchor.constraint(equalTo: fruitImage.leftAnchor)
     ]
+    
+    let stackViewConstraints = [
+      stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+      stackView.leftAnchor.constraint(equalTo: fruitImage.rightAnchor, constant: 8),
+      stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -18)
+    ]
 
     NSLayoutConstraint.activate(fruitImageConstraints)
     NSLayoutConstraint.activate(gradientViewConstraints)
+    NSLayoutConstraint.activate(stackViewConstraints)
   }
 }
