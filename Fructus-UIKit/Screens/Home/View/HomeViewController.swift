@@ -80,7 +80,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: FruitCell.identifier, for: indexPath) as? FruitCell else { return UITableViewCell() }
 
     cell.configure(with: vm.fruits[indexPath.row])
-    print("setup: \(vm.fruits[indexPath.row].title)")
 
     return cell
   }

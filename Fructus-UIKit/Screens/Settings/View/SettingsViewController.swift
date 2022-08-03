@@ -29,6 +29,16 @@ class SettingsViewController: UIViewController {
   }
   
   func setupNav() {
+    title = "Settings"
+    navigationController?.navigationBar.prefersLargeTitles = true
     
+    // add nav bar item
+    let barButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(onTapClose))
+    barButton.tintColor = .label
+    navigationItem.rightBarButtonItem = barButton
+  }
+  
+  @objc func onTapClose() {
+    navigationController?.dismiss(animated: true)
   }
 }

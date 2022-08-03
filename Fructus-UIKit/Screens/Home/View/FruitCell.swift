@@ -51,7 +51,7 @@ class FruitCell: UITableViewCell {
   private lazy var headlineLabel: UILabel = {
     let label: UILabel = .init(frame: .zero)
 
-    label.textColor = .gray
+    label.textColor = .secondaryLabel
     label.numberOfLines = 0
     label.font = .systemFont(ofSize: 12)
 

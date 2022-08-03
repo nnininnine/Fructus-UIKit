@@ -21,7 +21,7 @@ class HomeViewModel {
   // MARK: - Methods
   
   func showSetting(vc: UIViewController) {
-    let settingVC = SettingsViewController()
+    let settingVC = UINavigationController(rootViewController: SettingsViewController())
     
     vc.present(settingVC, animated: true)
   }
