@@ -22,12 +22,18 @@ class HomeViewController: UIViewController {
 
   private var vm: HomeViewModel = .init(fruits: fruitsData)
 
-  // MARK: - Init
+  // MARK: - LifeCycles
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     setup()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+//    navigationController?.navigationBar.prefersLargeTitles = true
   }
 
   override func viewDidLayoutSubviews() {
