@@ -10,15 +10,33 @@ import UIKit
 class FruitDetailViewController: UIViewController {
   // MARK: - Properties
 
+  private var fruit: Fruit
+
   // MARK: - Subviews
 
+  // MARK: - Init
+  
+  init(fruit: Fruit) {
+    self.fruit = fruit
+    
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   // MARK: - LifeCycles
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    // Do any additional setup after loading the view.
+    setup()
   }
 
   // MARK: - Methods
+
+  func setup() {
+    view.backgroundColor = .systemBackground
+  }
 }
