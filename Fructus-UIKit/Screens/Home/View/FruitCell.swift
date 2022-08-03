@@ -12,17 +12,7 @@ class FruitCell: UITableViewCell {
 
   static let identifier = "FruitCell"
 
-  private var fruit: Fruit? {
-    didSet {
-      addView()
-
-      if let fruit = fruit {
-        setupImage(with: fruit)
-      }
-
-      applyConstraints()
-    }
-  }
+  private var fruit: Fruit?
 
   // MARK: - Subviews
 
@@ -52,7 +42,6 @@ class FruitCell: UITableViewCell {
   private lazy var titleLabel: UILabel = {
     let label: UILabel = .init(frame: .zero)
 
-    label.text = fruit?.title
     label.textColor = .label
     label.font = .systemFont(ofSize: 24, weight: .bold)
 
@@ -62,7 +51,6 @@ class FruitCell: UITableViewCell {
   private lazy var headlineLabel: UILabel = {
     let label: UILabel = .init(frame: .zero)
 
-    label.text = fruit?.headline
     label.textColor = .gray
     label.numberOfLines = 0
     label.font = .systemFont(ofSize: 12)
@@ -81,6 +69,35 @@ class FruitCell: UITableViewCell {
 
     return stackView
   }()
+  
+  // MARK: - Init
+  
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    addView()
+  }
+  
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+  }
+
+  // MARK: - LifeCycles
+
+  override func prepareForReuse() {
+    super.prepareForReuse()
+
+    fruit = nil
+    titleLabel.text = nil
+    headlineLabel.text = nil
+    gradientView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    applyConstraints()
+  }
 
   // MARK: - Methods
 
@@ -88,6 +105,9 @@ class FruitCell: UITableViewCell {
 
   func configure(with fruit: Fruit) {
     self.fruit = fruit
+    
+    setupImage(with: fruit)
+    setupLabel(with: fruit)
   }
 
   func addView() {
@@ -97,7 +117,19 @@ class FruitCell: UITableViewCell {
   }
 
   func setupImage(with fruit: Fruit) {
+    // add gradient layer
+    let gradient = CAGradientLayer()
+    gradient.frame = CGRect(x: 0, y: 0, width: 92, height: 92)
+    gradient.colors = fruit.gradientColors.map { $0?.cgColor } as? [Any]
+    gradient.cornerRadius = 8
+    gradientView.layer.addSublayer(gradient)
+
     fruitImage.image = UIImage(named: fruit.image)
+  }
+
+  func setupLabel(with fruit: Fruit) {
+    titleLabel.text = fruit.title
+    headlineLabel.text = fruit.headline
   }
 
   func applyConstraints() {
@@ -112,7 +144,7 @@ class FruitCell: UITableViewCell {
       gradientView.topAnchor.constraint(equalTo: fruitImage.topAnchor),
       gradientView.leftAnchor.constraint(equalTo: fruitImage.leftAnchor)
     ]
-    
+
     let stackViewConstraints = [
       stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
       stackView.leftAnchor.constraint(equalTo: fruitImage.rightAnchor, constant: 8),

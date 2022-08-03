@@ -25,4 +25,10 @@ class HomeViewModel {
     
     vc.present(settingVC, animated: true)
   }
+  
+  func pushToFruitDetail(vc: UIViewController, with fruit: Fruit) {
+    let detailVC = FruitDetailViewController(fruit: fruit)
+    
+    vc.navigationController?.pushViewController(detailVC, animated: true)
+  }
 }
