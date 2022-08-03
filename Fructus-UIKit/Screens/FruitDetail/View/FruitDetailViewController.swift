@@ -49,6 +49,28 @@ class FruitDetailViewController: UIViewController {
     return label
   }()
 
+  private lazy var headlineLabel: UILabel = {
+    let label: UILabel = .init()
+    label.text = fruit.headline
+    label.numberOfLines = 0
+    label.sizeToFit()
+    label.font = .systemFont(ofSize: label.font.pointSize, weight: .bold)
+    label.textColor = .label
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+
+  private lazy var learnMoreLabel: UILabel = {
+    let label: UILabel = .init()
+    label.text = "Learn more about \(fruit.title)".uppercased()
+    label.numberOfLines = 0
+    label.sizeToFit()
+    label.font = .systemFont(ofSize: 16, weight: .medium)
+    label.textColor = fruit.gradientColors[1] ?? .label
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+
   private lazy var descriptionLabel: UILabel = {
     let label: UILabel = .init()
     label.text = fruit.description
@@ -117,6 +139,8 @@ class FruitDetailViewController: UIViewController {
   func setupViews() {
     contentView.addSubview(header)
     contentView.addSubview(titleLabel)
+    contentView.addSubview(headlineLabel)
+    contentView.addSubview(learnMoreLabel)
     contentView.addSubview(descriptionLabel)
 
     applyConstraints()
@@ -136,8 +160,20 @@ class FruitDetailViewController: UIViewController {
       titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -18),
     ]
 
+    let headlineLabelConstraints = [
+      headlineLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+      headlineLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 18),
+      headlineLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -18),
+    ]
+    
+    let learnMoreLabelConstraints = [
+      learnMoreLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: 20),
+      learnMoreLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 18),
+      learnMoreLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -18),
+    ]
+
     let descriptionLabelConstraints = [
-      descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+      descriptionLabel.topAnchor.constraint(equalTo: learnMoreLabel.bottomAnchor, constant: 20),
       descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
       descriptionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 18),
       descriptionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -18),
@@ -145,6 +181,8 @@ class FruitDetailViewController: UIViewController {
 
     NSLayoutConstraint.activate(headerConstraints)
     NSLayoutConstraint.activate(titleLabelConstraints)
+    NSLayoutConstraint.activate(headlineLabelConstraints)
+    NSLayoutConstraint.activate(learnMoreLabelConstraints)
     NSLayoutConstraint.activate(descriptionLabelConstraints)
   }
 }
