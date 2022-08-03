@@ -135,7 +135,7 @@ class FruitDetailViewController: UIViewController {
       titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 18),
       titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -18),
     ]
-    
+
     let descriptionLabelConstraints = [
       descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
       descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
@@ -148,3 +148,24 @@ class FruitDetailViewController: UIViewController {
     NSLayoutConstraint.activate(descriptionLabelConstraints)
   }
 }
+
+// MARK: - Previews
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct FruitDetailViewRepresentable: UIViewRepresentable {
+  func makeUIView(context: Context) -> some UIView {
+    return FruitDetailViewController(fruit: fruitsData[0]).view
+  }
+
+  func updateUIView(_ uiView: UIViewType, context: Context) {}
+}
+
+struct FruitDetailViewController_Preview: PreviewProvider {
+  static var previews: some View {
+    FruitDetailViewRepresentable()
+      .ignoresSafeArea()
+  }
+}
+#endif
