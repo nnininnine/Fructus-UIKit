@@ -26,13 +26,13 @@ class HomeViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     setup()
   }
-  
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
+
 //    navigationController?.navigationBar.prefersLargeTitles = true
   }
 
@@ -95,3 +95,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     vm.pushToFruitDetail(vc: self, with: fruit)
   }
 }
+
+// MARK: - Previews
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct HomeViewRepresentable: UIViewRepresentable {
+  func makeUIView(context: Context) -> some UIView {
+    return HomeViewController().view
+  }
+
+  func updateUIView(_ uiView: UIViewType, context: Context) {}
+}
+
+@available(iOS 13.0, *)
+struct HomeViewController_Preview: PreviewProvider {
+  static var previews: some View {
+    HomeViewRepresentable()
+  }
+}
+
+#endif
