@@ -8,7 +8,6 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
   // MARK: - Properties
   
   // MARK: - Subviews
@@ -18,8 +17,18 @@ class SettingsViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    // Do any additional setup after loading the view.
+    setup()
   }
   
   // MARK: - Methods
+  
+  func setup() {
+    view.backgroundColor = .systemBackground
+    
+    setupNav()
+  }
+  
+  func setupNav() {
+    
+  }
 }

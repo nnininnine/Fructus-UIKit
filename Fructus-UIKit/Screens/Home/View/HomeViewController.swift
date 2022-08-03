@@ -52,7 +52,7 @@ class HomeViewController: UIViewController {
     navigationController?.navigationBar.prefersLargeTitles = true
 
     // add nav bar item
-    let barButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: nil)
+    let barButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(onTapSetting))
     barButton.tintColor = .label
     navigationItem.rightBarButtonItem = barButton
   }
@@ -62,6 +62,10 @@ class HomeViewController: UIViewController {
 
     tableView.delegate = self
     tableView.dataSource = self
+  }
+
+  @objc func onTapSetting() {
+    vm.showSetting(vc: self)
   }
 }
 
