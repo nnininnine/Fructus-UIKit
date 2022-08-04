@@ -32,6 +32,7 @@ class SettingsTitleView: UIView {
   private lazy var stackView: UIStackView = {
     let stackView: UIStackView = .init(arrangedSubviews: [titleLabel, iconView])
     stackView.axis = .horizontal
+    stackView.distribution = .equalCentering
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()

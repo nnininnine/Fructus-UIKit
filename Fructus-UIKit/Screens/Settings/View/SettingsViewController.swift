@@ -10,7 +10,7 @@ import UIKit
 class SettingsViewController: UIViewController {
   // MARK: - Properties
   
-  let infoText: String = "Most fruits are naturally low in fat, sodium, and calories. None have cholesterol. Fruit are sounrces of many essential nutrients, including potassium, dietary fiber, vitamins, and much more."
+  let infoText: String = "Most fruits are naturally low in fat, sodium, and calories. None have cholesterol. Fruit are sources of many essential nutrients, including potassium, dietary fiber, vitamins, and much more."
   
   let logoImage: UIImage? = .init(named: "logo")
   
@@ -28,12 +28,69 @@ class SettingsViewController: UIViewController {
   private lazy var contentView: UIView = {
     let view: UIView = .init()
     view.translatesAutoresizingMaskIntoConstraints = false
-    view.backgroundColor = .blue
     return view
   }()
   
+  private lazy var divider: UIView = {
+    let divider = UIView()
+    divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    divider.backgroundColor = .systemGray4
+    
+    return divider
+  }()
+  
+  private lazy var infoLabel: UILabel = {
+    let label: UILabel = .init()
+    label.text = infoText
+    label.numberOfLines = 0
+    label.font = .systemFont(ofSize: 14)
+    label.sizeToFit()
+    return label
+  }()
+  
+  private lazy var infoImageView: UIImageView = {
+    let imageView: UIImageView = .init(image: logoImage)
+    
+    imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+    imageView.contentMode = .scaleAspectFit
+    imageView.layer.cornerRadius = 9
+    imageView.clipsToBounds = true
+    
+    return imageView
+  }()
+  
+  private lazy var infoContentView: UIStackView = {
+    let stackView: UIStackView = .init(arrangedSubviews: [infoImageView, infoLabel])
+    
+    stackView.axis = .horizontal
+    stackView.alignment = .center
+    stackView.spacing = 8
+    stackView.sizeToFit()
+    
+    return stackView
+  }()
+  
   private lazy var fructusInfoView: UIStackView = {
-    let stackView: UIStackView = .init(arrangedSubviews: [SettingsTitleView(frame: .zero, titleText: "Fructus", icon: "info.circle")])
+    let stackView: UIStackView = .init(arrangedSubviews: [
+      SettingsTitleView(frame: .zero, titleText: "Fructus", icon: "info.circle"),
+      divider,
+      infoContentView,
+    ])
+    
+    stackView.axis = .vertical
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.isLayoutMarginsRelativeArrangement = true
+    stackView.layoutMargins = .init(top: 18, left: 18, bottom: 18, right: 18)
+    stackView.alignment = .fill
+    stackView.distribution = .equalSpacing
+    stackView.spacing = 16
+    stackView.sizeToFit()
+    
+    // style
+    stackView.layer.cornerRadius = 6
+    stackView.backgroundColor = .systemGray6
+    
     return stackView
   }()
   
@@ -80,7 +137,7 @@ class SettingsViewController: UIViewController {
     // setup contentView constraints
     let contentViewConstraints = [
       contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-      contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+      contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -36),
       contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
       contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
     ]
@@ -90,10 +147,19 @@ class SettingsViewController: UIViewController {
   }
   
   func setupContentView() {
+    contentView.addSubview(fructusInfoView)
+    
     applyConstraints()
   }
   
-  func applyConstraints() {}
+  func applyConstraints() {
+    NSLayoutConstraint.activate([
+      fructusInfoView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 18),
+      fructusInfoView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      fructusInfoView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+      fructusInfoView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
+    ])
+  }
   
   @objc func onTapClose() {
     navigationController?.dismiss(animated: true)
