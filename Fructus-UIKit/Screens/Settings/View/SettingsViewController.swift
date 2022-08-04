@@ -12,6 +12,15 @@ class SettingsViewController: UIViewController {
   
   // MARK: - Subviews
   
+  private lazy var scrollView: UIScrollView = {
+    let scrollView: UIScrollView = .init()
+    
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.alwaysBounceVertical = true
+    
+    return scrollView
+  }()
+  
   // MARK: - LifeCycles
   
   override func viewDidLoad() {
@@ -26,6 +35,7 @@ class SettingsViewController: UIViewController {
     view.backgroundColor = .systemBackground
     
     setupNav()
+    setupScrollView()
   }
   
   func setupNav() {
@@ -36,6 +46,20 @@ class SettingsViewController: UIViewController {
     let barButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(onTapClose))
     barButton.tintColor = .label
     navigationItem.rightBarButtonItem = barButton
+  }
+  
+  func setupScrollView() {
+    view.addSubview(scrollView)
+    
+    // setup scrollView constraints
+    let scrollViewConstraints = [
+      scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+      scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+      scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+    ]
+    
+    NSLayoutConstraint.activate(scrollViewConstraints)
   }
   
   @objc func onTapClose() {
