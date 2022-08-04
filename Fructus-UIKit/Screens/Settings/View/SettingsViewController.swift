@@ -10,6 +10,10 @@ import UIKit
 class SettingsViewController: UIViewController {
   // MARK: - Properties
   
+  let infoText: String = "Most fruits are naturally low in fat, sodium, and calories. None have cholesterol. Fruit are sounrces of many essential nutrients, including potassium, dietary fiber, vitamins, and much more."
+  
+  let logoImage: UIImage? = .init(named: "logo")
+  
   // MARK: - Subviews
   
   private lazy var scrollView: UIScrollView = {
@@ -26,6 +30,11 @@ class SettingsViewController: UIViewController {
     view.translatesAutoresizingMaskIntoConstraints = false
     view.backgroundColor = .blue
     return view
+  }()
+  
+  private lazy var fructusInfoView: UIStackView = {
+    let stackView: UIStackView = .init(arrangedSubviews: [SettingsTitleView(frame: .zero, titleText: "Fructus", icon: "info.circle")])
+    return stackView
   }()
   
   // MARK: - LifeCycles
@@ -90,3 +99,23 @@ class SettingsViewController: UIViewController {
     navigationController?.dismiss(animated: true)
   }
 }
+
+// MARK: - Previews
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+struct SettingsViewRepresentable: UIViewRepresentable {
+  func makeUIView(context: Context) -> some UIView {
+    return SettingsViewController().view
+  }
+  
+  func updateUIView(_ uiView: UIViewType, context: Context) {}
+}
+
+struct SettingsViewController_Previews: PreviewProvider {
+  static var previews: some View {
+    SettingsViewRepresentable()
+  }
+}
+#endif
