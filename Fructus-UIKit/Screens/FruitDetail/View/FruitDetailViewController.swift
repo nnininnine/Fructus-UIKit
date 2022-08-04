@@ -81,6 +81,14 @@ class FruitDetailViewController: UIViewController {
     return label
   }()
 
+  private lazy var sourceLink: SourceLinkView = {
+    let sourceLink: SourceLinkView = .init(frame: .zero)
+
+    sourceLink.translatesAutoresizingMaskIntoConstraints = false
+
+    return sourceLink
+  }()
+
   // MARK: - Init
 
   init(fruit: Fruit) {
@@ -142,6 +150,7 @@ class FruitDetailViewController: UIViewController {
     contentView.addSubview(headlineLabel)
     contentView.addSubview(learnMoreLabel)
     contentView.addSubview(descriptionLabel)
+    contentView.addSubview(sourceLink)
 
     applyConstraints()
   }
@@ -165,7 +174,7 @@ class FruitDetailViewController: UIViewController {
       headlineLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 18),
       headlineLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -18),
     ]
-    
+
     let learnMoreLabelConstraints = [
       learnMoreLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: 20),
       learnMoreLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 18),
@@ -174,9 +183,15 @@ class FruitDetailViewController: UIViewController {
 
     let descriptionLabelConstraints = [
       descriptionLabel.topAnchor.constraint(equalTo: learnMoreLabel.bottomAnchor, constant: 20),
-      descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
       descriptionLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 18),
       descriptionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -18),
+    ]
+
+    let sourceLinkConstraints = [
+      sourceLink.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 32),
+      sourceLink.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -64),
+      sourceLink.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 18),
+      sourceLink.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -18),
     ]
 
     NSLayoutConstraint.activate(headerConstraints)
@@ -184,6 +199,7 @@ class FruitDetailViewController: UIViewController {
     NSLayoutConstraint.activate(headlineLabelConstraints)
     NSLayoutConstraint.activate(learnMoreLabelConstraints)
     NSLayoutConstraint.activate(descriptionLabelConstraints)
+    NSLayoutConstraint.activate(sourceLinkConstraints)
   }
 }
 
