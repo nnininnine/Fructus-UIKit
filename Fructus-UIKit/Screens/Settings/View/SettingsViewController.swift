@@ -21,6 +21,13 @@ class SettingsViewController: UIViewController {
     return scrollView
   }()
   
+  private lazy var contentView: UIView = {
+    let view: UIView = .init()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = .blue
+    return view
+  }()
+  
   // MARK: - LifeCycles
   
   override func viewDidLoad() {
@@ -36,6 +43,7 @@ class SettingsViewController: UIViewController {
     
     setupNav()
     setupScrollView()
+    setupContentView()
   }
   
   func setupNav() {
@@ -50,17 +58,33 @@ class SettingsViewController: UIViewController {
   
   func setupScrollView() {
     view.addSubview(scrollView)
+    scrollView.addSubview(contentView)
     
     // setup scrollView constraints
     let scrollViewConstraints = [
+      scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
       scrollView.topAnchor.constraint(equalTo: view.topAnchor),
       scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-      scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
-      scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+    ]
+    
+    // setup contentView constraints
+    let contentViewConstraints = [
+      contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+      contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+      contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+      contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
     ]
     
     NSLayoutConstraint.activate(scrollViewConstraints)
+    NSLayoutConstraint.activate(contentViewConstraints)
   }
+  
+  func setupContentView() {
+    applyConstraints()
+  }
+  
+  func applyConstraints() {}
   
   @objc func onTapClose() {
     navigationController?.dismiss(animated: true)
