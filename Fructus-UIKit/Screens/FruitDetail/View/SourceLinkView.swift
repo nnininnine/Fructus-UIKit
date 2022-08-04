@@ -11,8 +11,22 @@ class SourceLinkView: UIView {
   // MARK: - Properties
 
   let titleText: String = "Content Source"
+  let destinationLink: URL? = URL(string: "https://wikipedia.com")
 
   // MARK: - Subviews
+
+  private lazy var linkButton: UIButton = {
+    let button: UIButton = .init(configuration: .plain())
+
+    button.configuration?.attributedTitle = AttributedString("Wikipedia", attributes: AttributeContainer([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
+    button.configuration?.image = UIImage(systemName: "arrow.up.right.square")
+    button.configuration?.imagePlacement = .trailing
+    button.configuration?.imagePadding = 8
+    button.configuration?.contentInsets = .zero
+    button.sizeToFit()
+
+    return button
+  }()
 
   private lazy var titleLabel: UILabel = {
     let label: UILabel = .init()
@@ -20,11 +34,12 @@ class SourceLinkView: UIView {
     label.font = .systemFont(ofSize: 14)
     label.sizeToFit()
     return label
-  }() 
+  }()
 
   private lazy var stackView: UIStackView = {
-    let stackView: UIStackView = .init(arrangedSubviews: [titleLabel])
+    let stackView: UIStackView = .init(arrangedSubviews: [titleLabel, linkButton])
 
+    stackView.distribution = .equalSpacing
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.layoutMargins = .init(top: 14, left: 14, bottom: 14, right: 14)
     stackView.isLayoutMarginsRelativeArrangement = true
@@ -50,7 +65,7 @@ class SourceLinkView: UIView {
 
   func setup() {
     addSubview(stackView)
-
+    linkButton.addTarget(self, action: #selector(onTapLink), for: .touchUpInside)
     applyConstraints()
   }
 
@@ -63,6 +78,14 @@ class SourceLinkView: UIView {
     ]
 
     NSLayoutConstraint.activate(stackViewConstraints)
+  }
+
+  @objc func onTapLink() {
+    guard let url = destinationLink else {
+      return
+    }
+    
+    UIApplication.shared.open(url)
   }
 }
 
